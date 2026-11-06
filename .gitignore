@@ -1,0 +1,17 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build output
+**/bin/
+**/obj/
+
+# Local secrets and environment files
+**/appsettings.Local.json
+**/.env
+**/.env.*
+
+# Test results
+**/TestResults/
+**/coverage/

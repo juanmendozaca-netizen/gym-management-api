@@ -1,0 +1,156 @@
+@GymFlow_HostAddress = http://localhost:5080
+
+### Membresias - listar (200)
+GET {{GymFlow_HostAddress}}/api/Membresias
+Accept: application/json
+
+### Membresias - filtrar (200)
+GET {{GymFlow_HostAddress}}/api/Membresias?nombre=Premium&activa=true
+Accept: application/json
+
+### Membresias - obtener por ID (200)
+GET {{GymFlow_HostAddress}}/api/Membresias/1
+Accept: application/json
+
+### Membresias - socios de una membresia (200)
+GET {{GymFlow_HostAddress}}/api/Membresias/1/socios
+Accept: application/json
+
+### Membresias - ID inexistente (404)
+GET {{GymFlow_HostAddress}}/api/Membresias/9999
+Accept: application/json
+
+### Membresias - crear (201)
+POST {{GymFlow_HostAddress}}/api/Membresias
+Content-Type: application/json
+
+{
+  "nombre": "Plan Temporal",
+  "descripcion": "Membresia creada para pruebas locales",
+  "duracionMeses": 3,
+  "precio": 180.00,
+  "activa": true
+}
+
+### Membresias - nombre duplicado (409)
+POST {{GymFlow_HostAddress}}/api/Membresias
+Content-Type: application/json
+
+{
+  "nombre": "Plan Premium",
+  "descripcion": "Nombre duplicado",
+  "duracionMeses": 1,
+  "precio": 50.00,
+  "activa": true
+}
+
+### Membresias - datos invalidos (400)
+POST {{GymFlow_HostAddress}}/api/Membresias
+Content-Type: application/json
+
+{
+  "nombre": "",
+  "duracionMeses": 0,
+  "precio": -1,
+  "activa": true
+}
+
+### Membresias - actualizar (204)
+PUT {{GymFlow_HostAddress}}/api/Membresias/3
+Content-Type: application/json
+
+{
+  "membresiaId": 3,
+  "nombre": "Plan Anual",
+  "descripcion": "Acceso anual actualizado",
+  "duracionMeses": 12,
+  "precio": 699.90,
+  "activa": true
+}
+
+### Membresias - ID de ruta diferente al cuerpo (400)
+PUT {{GymFlow_HostAddress}}/api/Membresias/1
+Content-Type: application/json
+
+{
+  "membresiaId": 2,
+  "nombre": "Plan Modificado",
+  "duracionMeses": 1,
+  "precio": 50.00,
+  "activa": true
+}
+
+### Membresias - eliminar con socios asociados (409)
+DELETE {{GymFlow_HostAddress}}/api/Membresias/1
+
+### Socios - listar (200)
+GET {{GymFlow_HostAddress}}/api/Socios
+Accept: application/json
+
+### Socios - filtrar (200)
+GET {{GymFlow_HostAddress}}/api/Socios?nombre=Ana&dni=74125836&membresiaId=1
+Accept: application/json
+
+### Socios - obtener por ID (200)
+GET {{GymFlow_HostAddress}}/api/Socios/1
+Accept: application/json
+
+### Socios - ID inexistente (404)
+GET {{GymFlow_HostAddress}}/api/Socios/9999
+Accept: application/json
+
+### Socios - crear (201)
+POST {{GymFlow_HostAddress}}/api/Socios
+Content-Type: application/json
+
+{
+  "dni": "78945612",
+  "nombres": "Carlos",
+  "apellidos": "Morales Perez",
+  "correo": "carlos.morales@example.com",
+  "fechaNacimiento": "1996-05-20",
+  "membresiaId": 1
+}
+
+### Socios - membresia inexistente (400)
+POST {{GymFlow_HostAddress}}/api/Socios
+Content-Type: application/json
+
+{
+  "dni": "60000001",
+  "nombres": "Socio",
+  "apellidos": "Sin Membresia",
+  "correo": "sin.membresia@example.com",
+  "fechaNacimiento": "1990-01-01",
+  "membresiaId": 9999
+}
+
+### Socios - DNI o correo duplicado (409)
+POST {{GymFlow_HostAddress}}/api/Socios
+Content-Type: application/json
+
+{
+  "dni": "74125836",
+  "nombres": "Ana",
+  "apellidos": "Duplicada",
+  "correo": "otro@example.com",
+  "fechaNacimiento": "1990-01-01",
+  "membresiaId": 1
+}
+
+### Socios - actualizar (204)
+PUT {{GymFlow_HostAddress}}/api/Socios/1
+Content-Type: application/json
+
+{
+  "socioId": 1,
+  "dni": "74125836",
+  "nombres": "Ana",
+  "apellidos": "Torres Mendoza",
+  "correo": "ana.torres@example.com",
+  "fechaNacimiento": "1998-04-15",
+  "membresiaId": 1
+}
+
+### Socios - eliminar (204)
+DELETE {{GymFlow_HostAddress}}/api/Socios/1

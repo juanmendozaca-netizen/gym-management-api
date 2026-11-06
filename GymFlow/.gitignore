@@ -1,0 +1,21 @@
+# Compilación de .NET
+bin/
+obj/
+TestResults/
+coverage/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Visual Studio Code
+.vscode/
+
+# Archivos locales y secretos
+appsettings.Local.json
+.env
+.env.*
+
+# Archivos temporales
+*.tmp
